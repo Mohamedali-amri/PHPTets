@@ -27,8 +27,9 @@
             <th>Employee Name</th>
             <th>Email</th>
             <th>Event Name</th>
-            <th>Event Date</th>
             <th>Participation Fee</th>
+            <th>Event Date</th>
+
         </tr>
     </thead>
     <tbody id="table-body">
