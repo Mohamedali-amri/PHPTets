@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['json-file'])) {
             is_numeric($entry['event_id']) &&
             is_numeric($entry['participation_fee'])
         ) {
-            // Vérifier si les données existent déjà dans la base avec participation_id
             $checkStmt = $conn->prepare("SELECT COUNT(*) FROM reservations WHERE participation_id = ?");
             $checkStmt->bind_param("i", $entry['participation_id']);
             $checkStmt->execute();
@@ -45,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['json-file'])) {
             $checkStmt->close();
 
             if ($count == 0) {
-                // Si les données n'existent pas, on les insère
+
                 $stmt->bind_param(
                     "ississs",
                     $entry['participation_id'],
@@ -58,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['json-file'])) {
                 );
                 $stmt->execute();
             } else {
-                // Si les données existent déjà, on les ignore sans erreur
                 echo "Data with participation_id {$entry['participation_id']} already exists. Skipping insertion.<br>";
             }
         } else {
